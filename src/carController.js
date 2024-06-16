@@ -1,6 +1,8 @@
 const { nanoid } = require("nanoid");
 const { readJSONFile, writeJSONFile } = require("./helpers");
 
+const inform = console.log;
+
 function create(cars, carName, modelName, priceInCents) {
   const car = {
     name: carName,
@@ -33,4 +35,18 @@ function show(cars, carId) {
   }
 }
 
-module.exports = { create, index, show };
+function update(cars, carId, updatedBrand, updatedModel, updatedStock) {
+  const index = cars.findIndex((car) => car.id === carId);
+  if (index > -1) {
+    cars[index].name = updatedBrand;
+    cars[index].model = updatedModel;
+    cars[index].inStock = updatedStock;
+    inform(`Car successfully updated!`);
+    return cars;
+  } else {
+    inform(`Car ${carId} not found. No action taken`);
+    return cars;
+  }
+}
+
+module.exports = { create, index, show, update };

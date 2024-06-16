@@ -1,5 +1,5 @@
 const { readJSONFile, writeJSONFile } = require("./src/helpers");
-const { create, index, show } = require("./src/carController");
+const { create, index, show, update } = require("./src/carController");
 
 const inform = console.log;
 
@@ -25,7 +25,14 @@ function run() {
       inform(carShow);
       break;
     case "update":
-      inform(cars, car);
+      updatedCars = update(
+        cars,
+        process.argv[3],
+        process.argv[4],
+        process.argv[5],
+        process.argv[6]
+      );
+      writeToFile = true;
       break;
     case "destroy":
       inform(action, car);
