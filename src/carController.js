@@ -49,4 +49,15 @@ function update(cars, carId, updatedBrand, updatedModel, updatedStock) {
   }
 }
 
-module.exports = { create, index, show, update };
+function destroy(cars, carId) {
+  const index = cars.findIndex((car) => car.id === carId);
+  if (index > -1) {
+    cars.splice(index, 1);
+    inform("Car successfully removed from list!");
+  } else {
+    inform("Car not found. No action taken");
+  }
+  return cars;
+}
+
+module.exports = { create, index, show, update, destroy };
