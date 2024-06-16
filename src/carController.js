@@ -2,14 +2,10 @@ const { nanoid } = require("nanoid");
 const { readJSONFile, writeJSONFile } = require("./helpers");
 
 function create(cars, carName, modelName, priceInCents) {
-  const USDollar = new Intl.NumberFormat("en-US", {
-    style: "currency",
-    currency: "USD",
-  });
   const car = {
     name: carName,
     model: modelName,
-    price: `${USDollar.format(priceInCents)}`,
+    price: priceInCents,
     id: nanoid(4),
     inStock: true,
   };
@@ -27,9 +23,14 @@ function show(cars, carId) {
     currency: "USD",
   });
   const car = cars.find((car) => car.id === carId);
-  return `Brand: ${car.name} \n Model: ${car.model} \n Price: ${USDollar.format(
-    car.price
-  )} \n In Stock: ${car.inStock}`;
+
+  if (car) {
+    return `Brand: ${car.name} \n Model: ${
+      car.model
+    } \n Price: ${USDollar.format(car.price)} \n In Stock: ${car.inStock}`;
+  } else {
+    return "Car not found";
+  }
 }
 
 module.exports = { create, index, show };

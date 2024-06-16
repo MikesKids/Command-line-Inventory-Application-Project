@@ -21,11 +21,11 @@ function run() {
       writeToFile = true;
       break;
     case "show":
-      inform(cars, car);
-      break;
-    case "update":
       const carShow = show(cars, car);
       inform(carShow);
+      break;
+    case "update":
+      inform(cars, car);
       break;
     case "destroy":
       inform(action, car);
