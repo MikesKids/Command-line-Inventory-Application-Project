@@ -1,5 +1,12 @@
 const { readJSONFile, writeJSONFile } = require("./src/helpers");
-const { create, index, show, update, destroy } = require("./src/carController");
+const {
+  create,
+  index,
+  show,
+  update,
+  destroy,
+  addToCart,
+} = require("./src/carController");
 
 const inform = console.log;
 
@@ -22,22 +29,26 @@ function run() {
       writeToFile = true;
       break;
     case "show":
-      const car = process.argv[3];
-      const carShow = show(cars, car);
+      const id = process.argv[3];
+      const carShow = show(cars, id);
       inform(carShow);
       break;
     case "update":
-      const carId = process.argv[3];
-      const brand = process.argv[4];
-      const model = process.argv[5];
+      const carIdUpdate = process.argv[3];
+      const brandUpdate = process.argv[4];
+      const modelUpdate = process.argv[5];
       const stock = process.argv[6];
-      updatedCars = update(cars, carId, brand, model, stock);
+      updatedCars = update(cars, carIdUpdate, brandUpdate, modelUpdate, stock);
       writeToFile = true;
       break;
     case "destroy":
       const carId = process.argv[3];
       updatedCars = destroy(cars, carId);
       writeToFile = true;
+      break;
+    case "add":
+      const idCar = process.argv[3];
+      addToCart(cars, idCar);
       break;
     default:
       inform("There was an error with this model");

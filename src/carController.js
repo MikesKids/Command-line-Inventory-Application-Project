@@ -2,6 +2,7 @@ const { nanoid } = require("nanoid");
 const { readJSONFile, writeJSONFile } = require("./helpers");
 
 const inform = console.log;
+const cart = [];
 
 function create(cars, carName, modelName, priceInCents) {
   const car = {
@@ -60,4 +61,14 @@ function destroy(cars, carId) {
   return cars;
 }
 
-module.exports = { create, index, show, update, destroy };
+function addToCart(cars, carId) {
+  const item = cars.find((item) => item.id === carId);
+  if (item) {
+    cart.push(item);
+    inform("Item added to cart.");
+  } else {
+    inform("Item not found.");
+  }
+}
+
+module.exports = { create, index, show, update, destroy, addToCart };
